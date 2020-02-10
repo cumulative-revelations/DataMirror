@@ -33,25 +33,37 @@ import FacebookBulkInsert_vote
 
 
 if __name__ == '__main__':
+
 	TwitterFix.fct()
-	TwitterFix_msg.fct()
-	#TwitterFix_perso.fct()
+	TwitterFix_perso.fct()
+
 	FacebookFix.fct()
-	#FacebookFix_perso.fct()		
+	FacebookFix_perso.fct()
 	FacebookFix_postGrp.fct()
+
+	LinkedInFix.fct()
+	LinkedInFix_perso.fct()
+
 	TwitterBulkInsert_follow.fct()
 	TwitterBulkInsert_like.fct()
-	#TwitterBulkInsert_msg.fct()
-	#TwitterBulkInsert_perso.fct()
+	TwitterBulkInsert_perso.fct()
 	TwitterBulkInsert_tweet.fct()
+
 	FacebookBulkInsert_comment.fct()
 	FacebookBulkInsert_follow.fct()
 	FacebookBulkInsert_friend.fct()
 	FacebookBulkInsert_like.fct()
-	#FacebookBulkInsert_msg.fct()
-	#FacebookBulkInsert_perso.fct()
+	FacebookBulkInsert_perso.fct()
 	FacebookBulkInsert_post.fct()
 	FacebookBulkInsert_postGrp.fct()
-	#FacebookBulkInsert_vote.fct()
+	FacebookBulkInsert_vote.fct()
+
+	LinkedInBulkInsert_connections.fct()
+	LinkedInBulkInsert_perso.fct()
+	LinkedInBulkInsert_qualification.fct()
+	LinkedInFix_perso.fct()
+
+	 Profile_vega.fct()
+
 
 
