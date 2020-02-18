@@ -9,6 +9,7 @@ Created on Wed Dec 25 12:47:44 2019
 from elasticsearch import Elasticsearch, helpers 
 import os, uuid, json
 import common as c
+import sentiment as s
 
 
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
@@ -18,10 +19,16 @@ def bulkJsonData(json_file, _index, whatStuff):
 
 		json_doc = json.loads(doc)
 
+		sentiment=[0,0,0]
+		
 		# clean the text in comments and title from special character and emojies after json conversion
 		if "data" in json_doc:
 			my_text_location = json_doc["data"][0]["comment"]
 			my_text = my_text_location["comment"]
+
+			#get sentiment
+			sentiment = s.getSentiment(my_text)
+
 			clean_my_text = c.cleanText(my_text)
 			my_text_location.update([ ("comment", clean_my_text) ])	
 			json_doc.update([ ("all_text", clean_my_text) ])
@@ -35,6 +42,10 @@ def bulkJsonData(json_file, _index, whatStuff):
 		clean_my_title = c.cleanText(my_title)
 		json_doc.update([ ("title", clean_my_title) ])	
 
+		# add sentiment
+		json_doc.update([ ("mySentiment", sentiment[0]) ]) 
+		json_doc.update([ ("sentPositive", sentiment[1]) ]) 
+		json_doc.update([ ("sentNegative", sentiment[2]) ]) 		
 
 		# add load_type, used later for filter
 		json_doc.update([ ("load_type", whatStuff) ]) 
@@ -94,13 +105,15 @@ def fct():
 	# Create index with a schema
 	c.createIndex('dfp_text_fb_comment', schema, elastic)
 
-	inputFolder = "dataSource/json-facebook_data/comments"
+	inputFolder = "../dataSource/json-facebook_data/comments"
 	for loadType in ["comments"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:
 			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_text_fb_comment",loadType))
+			print ("Insert Facebook Comments")
 		except:
 			print ("Error in "+ whatFile)
 			pass
 
-	print ("Insert Facebook Comments")
+	
+

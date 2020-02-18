@@ -70,13 +70,14 @@ def fct():
   c.createIndex('dfp_perso_li', schema, elastic)
 
 
-  inputFolder = "dataSource/json-LinkedIn_data"
+  inputFolder = "../dataSource/json-LinkedIn_data"
   for loadType in ["Profile_fixed","PhoneNumbers","Email Addresses"]:
     whatFile = os.path.join(inputFolder, loadType+'.json')
     try:
-    	response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_perso_li",loadType))
+      response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_perso_li",loadType))
+      print ("Insert LinkedIn Personal Data")
     except:
-      print ("Error in "+ whatFile)
+      print ("Error in LinkedIn : "+ whatFile)
       pass
 
-  print ("Insert LinkedIn Personal Data")
+  

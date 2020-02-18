@@ -10,19 +10,25 @@ import json, os
 from ast import literal_eval
 import common as c
 
-def flatten(x, name=''):
-    if type(x) is dict:
-        for a in x:
-            flatten(x[a], name + a + '_')
-    elif type(x) is list:
-        i = 0
-        for a in x:
-            flatten(a, name + str(i) + '_')
-            i += 1
-    else:
-        out[name[:-1]] = x
+def flatten_json(y):
+    out = {}
 
+    def flatten(x, name=''):
+        if type(x) is dict:
+            for a in x:
+                flatten(x[a], name + a + '_')
+        elif type(x) is list:
+            i = 0
+            for a in x:
+                flatten(a, name + str(i) + '_')
+                i += 1
+        else:
+            out[name[:-1]] = x
+
+    flatten(y)
     return out
+
+    return outFlat
 
 def deflat(a_dict):
 	mylist = []
@@ -37,8 +43,8 @@ def deflat(a_dict):
 
 
 def fct():
-    path = "dataSource/json-twitter_data" 
-
+    path = "../dataSource/json-twitter_data" 
+    print ("Twitter Perso - Fix")
     try:
         with open(path+'/'+'profile.json') as json_file:
             data = json.load(json_file)
@@ -49,8 +55,8 @@ def fct():
         out = {}
         out1 = {}
 
-        out = flatten(data)
-        out1 = flatten(data1)
+        out = flatten_json(data)
+        out1 = flatten_json(data1)
 
 
         out.update(out1)
@@ -60,6 +66,7 @@ def fct():
         docsStr = ""
         for i in range(len(theList)-1):
         	docsStr = docsStr + str(theList[i]) + "\n"
+            
         docsStr = docsStr + str(theList[-1])
 
         docsStr = docsStr.replace("'",'"')
@@ -69,6 +76,7 @@ def fct():
         f.close()
     except:
         print("Error in Tw fix Perso")
+        pass
 
 
 

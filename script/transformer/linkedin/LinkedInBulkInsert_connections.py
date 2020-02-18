@@ -48,33 +48,34 @@ def bulkJsonData(json_file, _index,whatStuff):
 
 
 
-elastic = Elasticsearch(hosts=[{'host':'localhost','port':9200}])
+def fct():
+	elastic = Elasticsearch(hosts=[{'host':'localhost','port':9200}])
 
-# the Schema, used to force specific types and to add alias/ it is changed according to files content
+	# the Schema, used to force specific types and to add alias/ it is changed according to files content
 
-schema = {    
-	  "mappings":{
-	    "properties":{   
-	      "Connected On":   { "type":"date", "format":"dd MMM yyyy"},
-	      "created_at": { "type": "alias", "path": "Connected On" }
-	    } 
-	  }
-	}
-
-
-# Create index with a schema
-c.createIndex('dfp_people_li_connections', schema, elastic)
+	schema = {    
+		  "mappings":{
+		    "properties":{   
+		      "Connected On":   { "type":"date", "format":"dd MMM yyyy"},
+		      "created_at": { "type": "alias", "path": "Connected On" }
+		    } 
+		  }
+		}
 
 
-inputFolder = "dataSource/json-LinkedIn_data"
-for loadType in ["Connections"]:
-	whatFile = os.path.join(inputFolder, loadType+'.json')
-	#try:
-	response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_li_connections",loadType))
-	#except:
-		#print ("Error in "+ whatFile)
-		#pass
+	# Create index with a schema
+	c.createIndex('dfp_people_li_connections', schema, elastic)
 
 
-print ("Insert LinkedIn Friends")
+	inputFolder = "../dataSource/json-LinkedIn_data"
+	for loadType in ["Connections"]:
+		whatFile = os.path.join(inputFolder, loadType+'.json')
+		#try:
+		response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_li_connections",loadType))
+		#except:
+			#print ("Error in "+ whatFile)
+			#pass
+
+
+	print ("Insert LinkedIn Friends")
 

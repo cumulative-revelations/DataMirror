@@ -6,30 +6,37 @@ Created on Wed Dec 25 12:47:44 2019
 @author: Amal Htait
 """
 
+import sys
 
+sys.path.insert(0, 'twitter')
 import TwitterFix
-import TwitterFix_msg
-#import TwitterFix_perso
-import FacebookFix	
-#import FacebookFix_perso		
-import FacebookFix_postGrp
-
+import TwitterFix_perso
 import TwitterBulkInsert_follow
 import TwitterBulkInsert_like
-import TwitterBulkInsert_msg
-#import TwitterBulkInsert_perso
+import TwitterBulkInsert_perso
 import TwitterBulkInsert_tweet
+
+sys.path.insert(0, 'facebook')
+import FacebookFix	
+import FacebookFix_perso		
+import FacebookFix_postGrp
 import FacebookBulkInsert_comment	
 import FacebookBulkInsert_follow	
 import FacebookBulkInsert_friend	
 import FacebookBulkInsert_like	
-import FacebookBulkInsert_msg	
-#import FacebookBulkInsert_perso	
+import FacebookBulkInsert_perso	
 import FacebookBulkInsert_post
 import FacebookBulkInsert_postGrp
 import FacebookBulkInsert_vote
 
+sys.path.insert(0, 'linkedin')
+import LinkedInFix
+import LinkedInBulkInsert_connections
+import LinkedInBulkInsert_perso
+import LinkedInBulkInsert_qualification
+import LinkedInFix_perso
 
+import Profile_vega
 
 
 if __name__ == '__main__':
@@ -60,10 +67,11 @@ if __name__ == '__main__':
 
 	LinkedInBulkInsert_connections.fct()
 	LinkedInBulkInsert_perso.fct()
-	LinkedInBulkInsert_qualification.fct()
-	LinkedInFix_perso.fct()
+	#LinkedInBulkInsert_qualification.fct() to do
 
-	 Profile_vega.fct()
+
+	Profile_vega.fct()
+
 
 
 

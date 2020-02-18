@@ -71,15 +71,16 @@ def fct():
 	# Create index with a schema
 	c.createIndex('dfp_fb_vote', schema, elastic)
 
-	inputFolder = "dataSource/json-facebook_data/other_activity"
+	inputFolder = "../dataSource/json-facebook_data/other_activity"
 	for loadType in ["polls_you_voted_on"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:
 			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_fb_vote",loadType))
+			print ("Insert Facebook Votes")
 		except:
-			print ("Error in "+ whatFile)
+			print ("Error in Facebook votes")
 			pass
 
 
-	print ("Insert Facebook Votes")
+	
 

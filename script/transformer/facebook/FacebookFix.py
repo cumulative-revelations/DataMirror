@@ -44,20 +44,20 @@ def find_parts(s_arr):
 
 def fct():
   # Duplicated or no files?
-  count = len([name for name in os.listdir('dataSource') if name.endswith(".zip") and name.startswith("facebook-")])
+  count = len([name for name in os.listdir('../dataSource') if name.endswith(".zip") and name.startswith("facebook-")])
   if count == 0:
      print ("No Facebook Data")
   elif count > 1:
      print ("Duplicated Facebook File")
 
   # Get the file, unzip and fix it
-  for r, d, f in os.walk("dataSource"):
+  for r, d, f in os.walk("../dataSource"):
     for file in f:
       if file.endswith(".zip") and file.startswith("facebook-"):
 
         inputFolderZipped = os.path.join(r,file)
 
-        inputFolder = 'dataSource/facebook_data'
+        inputFolder = '../dataSource/facebook_data'
         if not os.path.exists(inputFolder):
         	os.mkdir(inputFolder)
 
@@ -81,7 +81,7 @@ def fct():
 
 
         print ("Facebook - Fix")
-        jsonInputFolder = 'dataSource/json-facebook_data'
+        jsonInputFolder = '../dataSource/json-facebook_data'
         if not os.path.exists(jsonInputFolder):
         	os.mkdir(jsonInputFolder)
 
@@ -89,8 +89,8 @@ def fct():
 
         for r, d, f in os.walk(inputFolder):
           r_parts = r.split('/')
-          if not os.path.exists(r_parts[0]+'/json-'+'/'.join(r_parts[1:])):
-            os.mkdir(r_parts[0]+'/json-'+'/'.join(r_parts[1:]))
+          if not os.path.exists(r_parts[0]+"/"+r_parts[1]+'/json-'+'/'.join(r_parts[2:])):
+            os.mkdir(r_parts[0]+"/"+r_parts[1]+'/json-'+'/'.join(r_parts[2:]))
 
 
 
@@ -116,7 +116,7 @@ def fct():
                   r_parts = r.split('/')
                   #print (r_parts[0]+'/json-'+'/'.join(r_parts[1:])+'/'+newFile)
 
-                  with codecs.open(os.path.join(r_parts[0]+'/json-'+'/'.join(r_parts[1:]),newFile), 'w', encoding='utf8') as f_json:
+                  with codecs.open(os.path.join(r_parts[0]+"/"+r_parts[1]+'/json-'+'/'.join(r_parts[2:]),newFile), 'w', encoding='utf8') as f_json:
                     f_json.write(docsStr)
                   f_json.close()
                 

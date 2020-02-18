@@ -11,7 +11,7 @@ import re
 import common as c
 
 def fct():
-  path = "dataSource/facebook_data/groups" 
+  path = "../dataSource/facebook_data/groups" 
   all_msg = []
 
   try:
@@ -67,7 +67,7 @@ def fct():
 
     docsStr.encode('ascii', errors='ignore').decode("utf-8")
 
-    f = open("dataSource/json-facebook_data/groups"+"/your_posts_and_comments_in_groups_fixed.json", "w")
+    f = open("../dataSource/json-facebook_data/groups"+"/your_posts_and_comments_in_groups_fixed.json", "w")
     f.write(docsStr)
     f.close()
   except:

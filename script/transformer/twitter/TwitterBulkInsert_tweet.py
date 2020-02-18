@@ -9,7 +9,7 @@ Created on Wed Dec 25 12:47:44 2019
 from elasticsearch import Elasticsearch, helpers 
 import os, uuid, json
 import common as c
-
+import sentiment as s
 
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
 def bulkJsonData(json_file, _index,whatStuff):
@@ -20,8 +20,14 @@ def bulkJsonData(json_file, _index,whatStuff):
 
       json_doc = json.loads(doc)
 
+      sentiment=[0,0,0]
+
       #print (doc)
       my_text = json_doc["full_text"]
+
+      #get sentiment
+      sentiment = s.getSentiment(my_text)
+
       clean_my_text = c.cleanText(my_text)
       json_doc.update([ ("full_text", clean_my_text) ])  
 
@@ -89,7 +95,10 @@ def bulkJsonData(json_file, _index,whatStuff):
     #    my_media.update([ ("additional_media_info", clean_my_name6) ]) 
 
 
-
+      # add sentiment
+      json_doc.update([ ("mySentiment", sentiment[0]) ]) 
+      json_doc.update([ ("sentPositive", sentiment[1]) ]) 
+      json_doc.update([ ("sentNegative", sentiment[2]) ]) 
 
       # add load_type, used later for filter
       json_doc.update([ ("load_type", whatStuff) ]) 
@@ -138,15 +147,16 @@ def fct():
   c.createIndex('dfp_text_tw_tweet', schema, elastic)
 
 
-  inputFolder = "dataSource/json-twitter_data"
+  inputFolder = "../dataSource/json-twitter_data"
   for loadType in ["tweet"]:
     whatFile = os.path.join(inputFolder, loadType+'.json')
     try:
       response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_text_tw_tweet",loadType))
+      print ("Insert Twitter Tweets")
     except:
-      print ("Error in "+ whatFile)
+      print ("Error in Twitter : "+ whatFile)
       pass
 
-  print ("Insert Twitter Tweets")
+  
 
 

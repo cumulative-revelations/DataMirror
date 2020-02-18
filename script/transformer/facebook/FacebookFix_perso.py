@@ -10,18 +10,22 @@ import json, os
 from ast import literal_eval
 import common as c
 
-def flatten(x, name=''):
-    if type(x) is dict:
-        for a in x:
-            flatten(x[a], name + a + '_')
-    elif type(x) is list:
-        i = 0
-        for a in x:
-            flatten(a, name + str(i) + '_')
-            i += 1
-    else:
-        out[name[:-1]] = x
+def flatten_json(y):
+    out = {}
 
+    def flatten(x, name=''):
+        if type(x) is dict:
+            for a in x:
+                flatten(x[a], name + a + '_')
+        elif type(x) is list:
+            i = 0
+            for a in x:
+                flatten(a, name + str(i) + '_')
+                i += 1
+        else:
+            out[name[:-1]] = x
+
+    flatten(y)
     return out
 
 def deflat(a_dict):
@@ -38,15 +42,15 @@ def deflat(a_dict):
 
 
 def fct():
-    path = "dataSource/json-facebook_data/profile_information" 
-
+    path = "../dataSource/json-facebook_data/profile_information" 
+    print ("Facebook Perso - Fix")
     try:
         with open(path+'/'+'profile_information.json') as json_file:
             data = json.load(json_file)
 
 
         out = {}
-        out = flatten(data)
+        out = flatten_json(data)
 
         theList = deflat(out)
 
@@ -64,6 +68,7 @@ def fct():
         
     except:
         print("Error in FB Fix Perso")
+        pass
 
 
 

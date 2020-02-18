@@ -9,6 +9,7 @@ Created on Wed Dec 25 12:47:44 2019
 from elasticsearch import Elasticsearch, helpers 
 import os, uuid, json
 import common as c
+import sentiment as s
 
 
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
@@ -18,6 +19,8 @@ def bulkJsonData(json_file, _index,whatStuff):
 
 		json_doc = json.loads(doc)
 
+		sentiment=[0,0,0]
+
 		# use a 'yield' generator so that the data isn't loaded into memory
 		if '{"index"' not in doc:
 
@@ -26,6 +29,10 @@ def bulkJsonData(json_file, _index,whatStuff):
 				for dt in json_doc['data']:
 					if 'post' in dt:
 						my_text = dt["post"]
+
+						#get sentiment
+						sentiment = s.getSentiment(my_text)
+
 						clean_my_text = c.cleanText(my_text)
 						dt.update([ ("post", clean_my_text) ])
 						json_doc.update([ ("all_text", clean_my_text) ])	
@@ -63,6 +70,10 @@ def bulkJsonData(json_file, _index,whatStuff):
 				clean_my_title = c.cleanText(my_title)
 				json_doc.update([ ("title", clean_my_title) ])	
 
+			# add sentiment
+			json_doc.update([ ("mySentiment", sentiment[0]) ]) 
+			json_doc.update([ ("sentPositive", sentiment[1]) ]) 
+			json_doc.update([ ("sentNegative", sentiment[2]) ]) 
 
 			# add load_type, used later for filter
 			json_doc.update([ ("load_type", whatStuff) ]) 
@@ -122,16 +133,17 @@ def fct():
 	c.createIndex('dfp_text_fb_groups', schema, elastic)
 
 
-	inputFolder = "dataSource/json-facebook_data/groups"
+	inputFolder = "../dataSource/json-facebook_data/groups"
 	for loadType in ["your_posts_and_comments_in_groups_fixed","your_group_membership_activity"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		
 		try:
 			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_text_fb_groups",loadType))
+			print ("Insert Facebook Groups")
 		except:
-			print ("Error in "+ whatFile)
+			print ("Error in Facebook posts in Group :"+ whatFile)
 			pass
 
 
-	print ("Insert Facebook Groups")
+	
 

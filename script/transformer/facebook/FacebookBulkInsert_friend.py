@@ -25,9 +25,15 @@ def bulkJsonData(json_file, _index,whatStuff):
 			clean_my_text = c.cleanText(my_text)
 			json_doc.update([ ("name", clean_my_text) ])	
 
+			if 'marked_as_spam' in json_doc:
+				my_newText = str(json_doc["marked_as_spam"])
+				clean_my_newText = c.cleanText(my_newText)
+				json_doc.update([ ("marked_as_spam", clean_my_newText) ])
+		
+
 			# add load_type, used later for filter
 			json_doc.update([ ("load_type", whatStuff) ]) 
-			json_doc.update([ ("source_type", "facebook") ]) 
+			json_doc.update([ ("source_type", "facebook") ])
 			new_doc = str(json_doc).replace("'", '"')
 			#print (new_doc)
 
@@ -42,7 +48,7 @@ def fct():
 	elastic = Elasticsearch(hosts=[{'host':'localhost','port':9200}])
 
 	# the Schema, used to force specific types and to add alias/ it is changed according to files content
-	schema = {      
+	schema = {    
 		  "mappings":{
 		    "properties":{   
 		      "name":  { "type":"keyword" },
@@ -53,17 +59,19 @@ def fct():
 		}
 
 	# Create index with a schema
-	c.createIndex('dfp_people_fb_follow', schema, elastic)
+	c.createIndex('dfp_people_fb_friends', schema, elastic)
 
 
-	inputFolder = "dataSource/json-facebook_data/following_and_followers"
-	for loadType in ["followers","following"]:
+	inputFolder = "../dataSource/json-facebook_data/friends"
+	for loadType in ["friends","received_friend_requests","rejected_friend_requests","removed_friends"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:
-			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_fb_follow",loadType))
+			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_fb_friends",loadType))
+			print ("Insert Facebook " + whatFile )
 		except:
-			print ("Error in "+ whatFile)
-			pass
+			print ("Error in Facebook : "+ whatFile)
+		pass
 
 
-	print ("Insert Facebook Followers and Followings")
+	
+

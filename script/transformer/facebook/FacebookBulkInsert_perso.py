@@ -49,13 +49,14 @@ def fct():
   c.createIndex('dfp_perso_fb', schema, elastic)
 
 
-  inputFolder = "dataSource/json-facebook_data/profile_information"
+  inputFolder = "../dataSource/json-facebook_data/profile_information"
   for loadType in ["profile_information_fixed"]:
     whatFile = os.path.join(inputFolder, loadType+'.json')
     try:
-    	response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_perso_fb",loadType))
+      response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_perso_fb",loadType))
+      print ("Insert Facebook Personal Data")
     except:
-      print ("Error in "+ whatFile)
+      print ("Error in Facebook Profile : "+ whatFile)
       pass
 
-  print ("Insert Facebook Personal Data")
+  

@@ -20,20 +20,9 @@ def bulkJsonData(json_file, _index,whatStuff):
 
 			json_doc = json.loads(doc)
 
-			# clean the text in comments and title from special character and emojies after json conversion
-			my_text = json_doc["name"]
-			clean_my_text = c.cleanText(my_text)
-			json_doc.update([ ("name", clean_my_text) ])	
-
-			if 'marked_as_spam' in json_doc:
-				my_newText = str(json_doc["marked_as_spam"])
-				clean_my_newText = c.cleanText(my_newText)
-				json_doc.update([ ("marked_as_spam", clean_my_newText) ])
-		
-
 			# add load_type, used later for filter
 			json_doc.update([ ("load_type", whatStuff) ]) 
-			json_doc.update([ ("source_type", "facebook") ])
+			json_doc.update([ ("source_type", "twitter") ]) 
 			new_doc = str(json_doc).replace("'", '"')
 			#print (new_doc)
 
@@ -48,29 +37,28 @@ def fct():
 	elastic = Elasticsearch(hosts=[{'host':'localhost','port':9200}])
 
 	# the Schema, used to force specific types and to add alias/ it is changed according to files content
-	schema = {    
+	schema = {      
 		  "mappings":{
 		    "properties":{   
-		      "name":  { "type":"keyword" },
-		      "timestamp":   { "type":"date", "format":"date_optional_time||epoch_second"},
-		      "created_at": { "type": "alias", "path": "timestamp" }
+				"accountId":  { "type":"keyword" },
+				"userLink":   { "type":"keyword" }
 		    } 
 		  }
 		}
 
 	# Create index with a schema
-	c.createIndex('dfp_people_fb_friends', schema, elastic)
+	c.createIndex('dfp_people_tw_follow', schema, elastic)
 
 
-	inputFolder = "dataSource/json-facebook_data/friends"
-	for loadType in ["friends","received_friend_requests","rejected_friend_requests","removed_friends"]:
+	inputFolder = "../dataSource/json-twitter_data"
+	for loadType in ["follower","following"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:
-			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_fb_friends",loadType))
+			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_tw_follow",loadType))
+			print ("Insert Twitter Followers and Followings")
 		except:
-			print ("Error in "+ whatFile)
-		pass
+			print ("Error in Twitter : "+ whatFile)
+			pass
 
-
-	print ("Insert Facebook Friends")
-
+	
+	 

@@ -49,13 +49,14 @@ def fct():
 	c.createIndex('dfp_perso_tw', schema, elastic)
 
 
-	inputFolder = "dataSource/json-twitter_data"
+	inputFolder = "../dataSource/json-twitter_data"
 	for loadType in ["personal_data_fixed"]:
 			whatFile = os.path.join(inputFolder, loadType+'.json')
 			try:
 				response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_perso_tw",loadType))
+				print ("Insert Twitter Personal Data")
 			except:
-					print ("Error in "+ whatFile)
+					print ("Error in Twitter : "+ whatFile)
 					pass
 
-	print ("Insert Twitter Personal Data")
+	

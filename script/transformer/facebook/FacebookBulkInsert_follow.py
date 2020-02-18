@@ -20,17 +20,16 @@ def bulkJsonData(json_file, _index,whatStuff):
 
 			json_doc = json.loads(doc)
 
-			#print (doc)
-			my_text = json_doc["like"]["fullText"]
+			# clean the text in comments and title from special character and emojies after json conversion
+			my_text = json_doc["name"]
 			clean_my_text = c.cleanText(my_text)
-			json_doc["like"].update([ ("fullText", clean_my_text) ])	
+			json_doc.update([ ("name", clean_my_text) ])	
 
 			# add load_type, used later for filter
 			json_doc.update([ ("load_type", whatStuff) ]) 
-			json_doc.update([ ("source_type", "twitter") ]) 
+			json_doc.update([ ("source_type", "facebook") ]) 
 			new_doc = str(json_doc).replace("'", '"')
 			#print (new_doc)
-
 
 			yield {
 				"_index": _index,
@@ -43,37 +42,29 @@ def fct():
 	elastic = Elasticsearch(hosts=[{'host':'localhost','port':9200}])
 
 	# the Schema, used to force specific types and to add alias/ it is changed according to files content
-	schema = {   
-
-	    "settings": {
-	      "analysis": {
-	        "analyzer": {
-	          "my_english_analyzer": {"type": "standard","stopwords": "_english_"}
-		       }
-		     }
-		   },   
+	schema = {      
 		  "mappings":{
 		    "properties":{   
-				"tweetId":   { "type":"keyword" },
-				"fullText": { "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True},
-				"expandedUrl":   { "type":"keyword" },
-				"all_text": { "type": "alias", "path": "fullText" }
+		      "name":  { "type":"keyword" },
+		      "timestamp":   { "type":"date", "format":"date_optional_time||epoch_second"},
+		      "created_at": { "type": "alias", "path": "timestamp" }
 		    } 
 		  }
 		}
 
 	# Create index with a schema
-	c.createIndex('dfp_tw_like', schema, elastic)
+	c.createIndex('dfp_people_fb_follow', schema, elastic)
 
 
-	inputFolder = "dataSource/json-twitter_data"
-	for loadType in ["like"]:
+	inputFolder = "../dataSource/json-facebook_data/following_and_followers"
+	for loadType in ["followers","following"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:
-			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_tw_like",loadType))
+			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_fb_follow",loadType))
+			print ("Insert Facebook "+ loadType)
 		except:
-			print ("Error in "+ whatFile)
+			print ("Error in Facebook : "+ whatFile)
 			pass
 
-	print ("Insert Twitter Likes")
-	 
+
+	
