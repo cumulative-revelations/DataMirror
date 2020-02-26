@@ -37,7 +37,7 @@ import LinkedInBulkInsert_qualification
 import LinkedInFix_perso
 
 import Profile_vega
-
+import Qualification_vega
 
 if __name__ == '__main__':
 
@@ -67,11 +67,10 @@ if __name__ == '__main__':
 
 	LinkedInBulkInsert_connections.fct()
 	LinkedInBulkInsert_perso.fct()
-	#LinkedInBulkInsert_qualification.fct() to do
 
 
 	Profile_vega.fct()
-
+	Qualification_vega.fct()
 
 
 
