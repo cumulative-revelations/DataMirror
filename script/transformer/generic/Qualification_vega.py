@@ -12,7 +12,7 @@ import common as c
 
 
 def fct():
-    path = '../dataSource' 
+    path = '../../dataSource' 
 
     new_data = [{"id": 1,"name": "User", "source" : "No Source"}]
 
@@ -72,7 +72,7 @@ def fct():
 
 
         # create the file
-        with open('../../vegaStuff/Qualifications.json', 'w') as outfile:
+        with open('../../../vegaStuff/Qualifications.json', 'w') as outfile:
             json.dump(new_data, outfile)
             print ("Create Qualification Vega")
 

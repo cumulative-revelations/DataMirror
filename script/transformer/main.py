@@ -36,8 +36,15 @@ import LinkedInBulkInsert_perso
 import LinkedInBulkInsert_qualification
 import LinkedInFix_perso
 
+sys.path.insert(0, 'generic')
 import Profile_vega
 import Qualification_vega
+import FriendsCollecting
+import FriendBulkInsert
+import TextSentimentBulkInsert
+import TopicDetection
+import TopicBulkInsert
+
 
 if __name__ == '__main__':
 
@@ -71,6 +78,10 @@ if __name__ == '__main__':
 
 	Profile_vega.fct()
 	Qualification_vega.fct()
-
+	FriendsCollecting.fct()
+	FriendBulkInsert.fct()
+	TextSentimentBulkInsert.fct()
+	TopicDetection.fct()
+	TopicBulkInsert.fct()
 
 
