@@ -55,9 +55,9 @@ def fct():
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:
 			response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_people_tw_follow",loadType))
-			print ("Insert Twitter Followers and Followings")
+			print ("Insert Twitter follower and following")
 		except:
-			print ("Error in Twitter : "+ whatFile)
+			print ("Error in Insert Twitter : "+ whatFile)
 			pass
 
 	

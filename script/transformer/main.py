@@ -13,7 +13,7 @@ import TwitterFix
 import TwitterFix_perso
 import TwitterBulkInsert_follow
 import TwitterBulkInsert_like
-import TwitterBulkInsert_perso
+#import TwitterBulkInsert_perso
 import TwitterBulkInsert_tweet
 
 sys.path.insert(0, 'facebook')
@@ -24,7 +24,7 @@ import FacebookBulkInsert_comment
 import FacebookBulkInsert_follow	
 import FacebookBulkInsert_friend	
 import FacebookBulkInsert_like	
-import FacebookBulkInsert_perso	
+#import FacebookBulkInsert_perso	
 import FacebookBulkInsert_post
 import FacebookBulkInsert_postGrp
 import FacebookBulkInsert_vote
@@ -32,8 +32,8 @@ import FacebookBulkInsert_vote
 sys.path.insert(0, 'linkedin')
 import LinkedInFix
 import LinkedInBulkInsert_connections
-import LinkedInBulkInsert_perso
-import LinkedInBulkInsert_qualification
+#import LinkedInBulkInsert_perso
+#import LinkedInBulkInsert_qualification
 import LinkedInFix_perso
 
 sys.path.insert(0, 'generic')
@@ -41,7 +41,6 @@ import Profile_vega
 import Qualification_vega
 import FriendsCollecting
 import FriendBulkInsert
-import TextSentimentBulkInsert
 import TopicDetection
 import TopicBulkInsert
 
@@ -60,27 +59,26 @@ if __name__ == '__main__':
 
 	TwitterBulkInsert_follow.fct()
 	TwitterBulkInsert_like.fct()
-	TwitterBulkInsert_perso.fct()
+	#TwitterBulkInsert_perso.fct()
 	TwitterBulkInsert_tweet.fct()
 
 	FacebookBulkInsert_comment.fct()
 	FacebookBulkInsert_follow.fct()
 	FacebookBulkInsert_friend.fct()
 	FacebookBulkInsert_like.fct()
-	FacebookBulkInsert_perso.fct()
+	#FacebookBulkInsert_perso.fct()
 	FacebookBulkInsert_post.fct()
 	FacebookBulkInsert_postGrp.fct()
 	FacebookBulkInsert_vote.fct()
 
 	LinkedInBulkInsert_connections.fct()
-	LinkedInBulkInsert_perso.fct()
+	#LinkedInBulkInsert_perso.fct()
 
 
 	Profile_vega.fct()
 	Qualification_vega.fct()
 	FriendsCollecting.fct()
 	FriendBulkInsert.fct()
-	TextSentimentBulkInsert.fct()
 	TopicDetection.fct()
 	TopicBulkInsert.fct()
 

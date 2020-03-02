@@ -8,7 +8,6 @@ Created on Wed Dec 25 12:47:44 2019
 
 import json, os, ast
 from ast import literal_eval
-import common as c
 
 
 def fct():
@@ -97,10 +96,12 @@ def fct():
 
 
         # create the file
-        with open('../../../vegaStuff/Profile.json', 'w') as outfile:
+        with open('../../vegaStuff/Profile.json', 'w') as outfile:
             json.dump(new_data, outfile)
             print ("Create Profile Vega")
 
     except:
        print ("Error in Profile Vega")
        pass
+
+

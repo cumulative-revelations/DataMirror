@@ -77,7 +77,7 @@ def fct():
       response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_perso_li",loadType))
       print ("Insert LinkedIn Personal Data")
     except:
-      print ("Error in LinkedIn : "+ whatFile)
+      print ("Error in Insert LinkedIn : "+ whatFile)
       pass
 
   

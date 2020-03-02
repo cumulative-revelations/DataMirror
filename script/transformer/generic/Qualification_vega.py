@@ -7,7 +7,6 @@ Created on Wed Dec 25 12:47:44 2019
 """
 
 import json, os, sys, codecs, csv, ast
-import common as c
 
 
 
@@ -72,10 +71,10 @@ def fct():
 
 
         # create the file
-        with open('../../../vegaStuff/Qualifications.json', 'w') as outfile:
+        with open('../../vegaStuff/Qualifications.json', 'w') as outfile:
             json.dump(new_data, outfile)
             print ("Create Qualification Vega")
 
     except:
-       print ("Error in Profile Vega")
+       print ("Error in Qualification Vega")
        pass

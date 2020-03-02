@@ -25,11 +25,6 @@ def clean(doc):
     normalized = " ".join(lemma.lemmatize(word) for word in punc_free.split())
     return normalized
 
-# clean text
-def cleanText(inputString):
-    outputString = inputString.encode('ascii', 'ignore').decode('ascii')  #remove emojy
-    outputString = outputString.replace("'"," ").replace('"'," ").replace("\n","").lower() #remove ' and " since they cause issues at some point
-    return outputString
 
 def getTopics(doc_complete):
     doc_clean = [clean(doc).split() for doc in doc_complete]   
@@ -83,7 +78,7 @@ def fct():
 
 	    for i in range(len(fb_topics)):
 	        for j in range(len(fb_topics[i])):
-	            new_data.append({"topic_id": "fb_"+str(i) ,"topic_word" : cleanText(fb_topics[i][j]), "source" : "Facebook"})
+	            new_data.append({"topic_id": "fb_"+str(i) ,"topic_word" : c.cleanText(fb_topics[i][j]), "source" : "Facebook"})
 	     
 
 
@@ -104,7 +99,7 @@ def fct():
 
 	    for i in range(len(tw_topics)):
 	        for j in range(len(tw_topics[i])):
-	            new_data.append({"topic_id": "tw_"+str(i) ,"topic_word" : cleanText(tw_topics[i][j]), "source" : "Twitter"})
+	            new_data.append({"topic_id": "tw_"+str(i) ,"topic_word" : c.cleanText(tw_topics[i][j]), "source" : "Twitter"})
 
 
 
@@ -122,6 +117,6 @@ def fct():
 	    print ("Collect Topics")
 
     except:
-       print ("Error in Friends")
+       print ("Error in Collect Topics")
        pass
 

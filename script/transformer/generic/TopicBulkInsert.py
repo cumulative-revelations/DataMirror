@@ -4,7 +4,6 @@
 from elasticsearch import Elasticsearch, helpers 
 import os, uuid, json, sys
 sys.path.insert(0, '../../transformer')
-import common as c
 
 
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
@@ -55,7 +54,7 @@ def fct():
 	                response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_topic",file_part))
 	                print ("Insert Topics")
                 except:
-                    print ("Error in "+ whatFile)
+                    print ("Error in Insert "+ whatFile)
                     pass
 
 

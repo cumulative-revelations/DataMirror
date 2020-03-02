@@ -6,10 +6,10 @@ Created on Wed Dec 25 12:47:44 2019
 @author: Amal Htait
 """
 
-import json, os, ast, twint, codecs, csv
+import json, os, ast, twint, codecs, csv, sys
 from ast import literal_eval
+sys.path.insert(0, '..')
 import common as c
-
 
 
 def facebookTags(path):
@@ -88,7 +88,7 @@ def usersFollowings(MyUsername,path):
 
 
 def fct():
-    path = '../../dataSource/' 
+    path = '../dataSource/' 
     new_data = []
     try:
 
@@ -198,13 +198,13 @@ def fct():
         string = string.replace("'",'"')
 
 
-        file_res = open('../../../vegaStuff/friends.json',"w") 
+        file_res = open('../../vegaStuff/friends.json',"w") 
         file_res.write(string)
         file_res.close()
         print ("Collect Friends")
 
     except:
-       print ("Error in Friends")
+       print ("Error in Collect Friends")
        pass
 
 
