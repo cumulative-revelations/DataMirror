@@ -11,6 +11,8 @@ import sys
 import codecs
 from zipfile import ZipFile
 
+dirpath = os.getcwd()
+
 def find_parts(s_arr):
     strArr =  []
     pstack = []
@@ -45,7 +47,7 @@ def find_parts(s_arr):
 
 def fct():
   # Duplicated or no files?
-  count = len([name for name in os.listdir('../dataSource') if name.endswith(".zip") and name.startswith("twitter-20")])
+  count = len([name for name in os.listdir(dirpath+'/script/dataSource') if name.endswith(".zip") and name.startswith("twitter-20")])
 
   if count == 0:
      print ("No Twitter Data")
@@ -53,18 +55,18 @@ def fct():
      print ("Duplicated Twitter File")
   else:
     # Get the file, unzip and fix it
-    for r, d, f in os.walk("../dataSource"):
+    for r, d, f in os.walk(dirpath+"/script/dataSource"):
       for file in f:
         if file.endswith(".zip") and file.startswith("twitter-20"):
 
           inputFolderZipped = os.path.join(r,file)
 
-          inputFolder = '../dataSource/twitter_data'
+          inputFolder = dirpath+'/script/dataSource/twitter_data'
           if not os.path.exists(inputFolder):
-          	os.mkdir(inputFolder)
+             os.mkdir(inputFolder)
 
           #with zipfile.ZipFile(inputFolderZipped, 'r') as zip_ref:
-          #	zip_ref.extractall(inputFolder)
+          #   zip_ref.extractall(inputFolder)
 
           print ("Twitter - Unzip")
           # Create a ZipFile Object and load sample.zip in it
@@ -82,7 +84,7 @@ def fct():
 
 
           print ("Twitter - Fix")
-          jsonInputFolder = '../dataSource/json-twitter_data'
+          jsonInputFolder = dirpath+'/script/dataSource/json-twitter_data'
           if not os.path.exists(jsonInputFolder):
             os.mkdir(jsonInputFolder)
 
@@ -113,7 +115,8 @@ def fct():
                   newFile = file.split('.')[0]+'.json'
 
                   r_parts = r.split("/")
-                  with codecs.open(os.path.join(r_parts[0]+"/"+r_parts[1]+"/json-"+r_parts[2],newFile), 'w', encoding='utf8') as f_json:
+                  m_parts = "/".join(r_parts[:-1])
+                  with codecs.open(os.path.join(m_parts+"/json-"+r_parts[-1],newFile), 'w', encoding='utf8') as f_json:
                     f_json.write(docsStr)
                   f_json.close()
 

@@ -8,12 +8,12 @@ Created on Wed Dec 25 12:47:44 2019
 
 import json, os, sys, codecs, csv, ast
 
-
+dirpath = os.getcwd()
 
 def fct():
-    path = '../../dataSource' 
+    path = dirpath+'/script/dataSource' 
 
-    new_data = [{"id": 1,"name": "User", "source" : "No Source"}]
+    new_data = [{"id": "root","name": "User", "source" : "No Source"}]
 
 
     try:
@@ -71,7 +71,7 @@ def fct():
 
 
         # create the file
-        with open('../../vegaStuff/Qualifications.json', 'w') as outfile:
+        with open(dirpath+'/vegaFiles/Qualifications.json', 'w') as outfile:
             json.dump(new_data, outfile)
             print ("Create Qualification Vega")
 

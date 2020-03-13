@@ -9,9 +9,10 @@ Created on Wed Dec 25 12:47:44 2019
 import json, os, ast
 from ast import literal_eval
 
+dirpath = os.getcwd()
 
 def fct():
-    path = '../../dataSource/' 
+    path = dirpath+'/script/dataSource/' 
 
     new_data = [{"id": 1,"name": "User", "source" : "No Source"}]
 
@@ -96,7 +97,7 @@ def fct():
 
 
         # create the file
-        with open('../../vegaStuff/Profile.json', 'w') as outfile:
+        with open(dirpath+'/vegaFiles/Profile.json', 'w') as outfile:
             json.dump(new_data, outfile)
             print ("Create Profile Vega")
 

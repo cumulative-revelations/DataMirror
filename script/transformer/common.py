@@ -39,7 +39,7 @@ def scriptPath():
 
 # This function opens a file and returns its contents as a list of strings split by linebreaks
 def getDataFromFile(myFile, path=scriptPath()):
-	file = open(path + str(myFile), encoding="utf8", errors='ignore')
+	file = open(str(myFile), encoding="utf8", errors='ignore')
 	data = [line.strip() for line in file]
 	file.close()
 	return data

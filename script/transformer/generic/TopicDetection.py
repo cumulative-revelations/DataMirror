@@ -15,6 +15,8 @@ import os, sys, json
 sys.path.insert(0, '..')
 import common as c
 
+dirpath = os.getcwd()
+
 def clean(doc):
     stop = set(stopwords.words('english'))
     exclude = set(string.punctuation)
@@ -54,7 +56,7 @@ def getTopics(doc_complete):
 
 
 def fct():
-    path = '../../dataSource/' 
+    path = dirpath+'/script/dataSource/' 
     new_data = []
 
     try:
@@ -111,7 +113,7 @@ def fct():
 	    string = string.replace("'",'"')
 
 
-	    file_res = open('../../../vegaStuff/Topics.json',"w") 
+	    file_res = open(dirpath+'/vegaFiles/Topics.json',"w") 
 	    file_res.write(string)
 	    file_res.close()
 	    print ("Collect Topics")

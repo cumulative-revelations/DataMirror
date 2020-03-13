@@ -3,8 +3,10 @@
 
 from elasticsearch import Elasticsearch, helpers 
 import os, uuid, json, sys
-sys.path.insert(0, '../../transformer')
+sys.path.insert(0, '..')
+import common as c
 
+dirpath = os.getcwd()
 
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
 def bulkJsonData(json_file, _index,whatStuff):
@@ -43,7 +45,7 @@ def fct():
     c.createIndex('dfp_topic', schema, elastic)
 
 
-    inputFolder = '../../../vegaStuff/'
+    inputFolder = dirpath+'/vegaFiles/'
 
     for r, d, f in os.walk(inputFolder):
         for file in f:

@@ -8,7 +8,7 @@ Created on Wed Dec 25 12:47:44 2019
 
 import sys
 
-sys.path.insert(0, 'twitter')
+sys.path.insert(0, 'script/transformer/twitter')
 import TwitterFix
 import TwitterFix_perso
 import TwitterBulkInsert_follow
@@ -16,7 +16,7 @@ import TwitterBulkInsert_like
 #import TwitterBulkInsert_perso
 import TwitterBulkInsert_tweet
 
-sys.path.insert(0, 'facebook')
+sys.path.insert(0, 'script/transformer/facebook')
 import FacebookFix	
 import FacebookFix_perso		
 import FacebookFix_postGrp
@@ -29,14 +29,14 @@ import FacebookBulkInsert_post
 import FacebookBulkInsert_postGrp
 import FacebookBulkInsert_vote
 
-sys.path.insert(0, 'linkedin')
+sys.path.insert(0, 'script/transformer/linkedin')
 import LinkedInFix
 import LinkedInBulkInsert_connections
 #import LinkedInBulkInsert_perso
 #import LinkedInBulkInsert_qualification
 import LinkedInFix_perso
 
-sys.path.insert(0, 'generic')
+sys.path.insert(0, 'script/transformer/generic')
 import Profile_vega
 import Qualification_vega
 import FriendsCollecting

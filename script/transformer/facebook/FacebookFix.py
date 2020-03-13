@@ -11,6 +11,8 @@ import sys
 import codecs
 from zipfile import ZipFile
 
+dirpath = os.getcwd()
+
 def find_parts(s_arr):
     strArr =  []
     pstack = []
@@ -44,20 +46,20 @@ def find_parts(s_arr):
 
 def fct():
   # Duplicated or no files?
-  count = len([name for name in os.listdir('../dataSource') if name.endswith(".zip") and name.startswith("facebook-")])
+  count = len([name for name in os.listdir(dirpath+'/script/dataSource') if name.endswith(".zip") and name.startswith("facebook-")])
   if count == 0:
      print ("No Facebook Data")
   elif count > 1:
      print ("Duplicated Facebook File")
 
   # Get the file, unzip and fix it
-  for r, d, f in os.walk("../dataSource"):
+  for r, d, f in os.walk(dirpath+"/script/dataSource"):
     for file in f:
       if file.endswith(".zip") and file.startswith("facebook-"):
 
         inputFolderZipped = os.path.join(r,file)
 
-        inputFolder = '../dataSource/facebook_data'
+        inputFolder = dirpath+'/script/dataSource/facebook_data'
         if not os.path.exists(inputFolder):
         	os.mkdir(inputFolder)
 
@@ -81,21 +83,22 @@ def fct():
 
 
         print ("Facebook - Fix")
-        jsonInputFolder = '../dataSource/json-facebook_data'
+        jsonInputFolder = dirpath+'/script/dataSource/json-facebook_data'
         if not os.path.exists(jsonInputFolder):
         	os.mkdir(jsonInputFolder)
 
 
 
         for r, d, f in os.walk(inputFolder):
-          r_parts = r.split('/')
-          if not os.path.exists(r_parts[0]+"/"+r_parts[1]+'/json-'+'/'.join(r_parts[2:])):
-            os.mkdir(r_parts[0]+"/"+r_parts[1]+'/json-'+'/'.join(r_parts[2:]))
+          file_path = r.replace(inputFolder,jsonInputFolder)
+          if not os.path.exists(file_path):
+            os.mkdir(file_path)
 
 
 
         # r=root, d=directories, f=files
         for r, d, f in os.walk(inputFolder):
+            file_path = r.replace(inputFolder,jsonInputFolder)
             for file in f:
               if file.endswith(".json"): #I can add a list of files
                 #subPath = os.path.join(r, file)
@@ -113,11 +116,10 @@ def fct():
                   docs = find_parts(MyFile[1:-1])
                   docsStr= '\n'.join(docs)
                   newFile = file.split('.')[0]+'.json'
-                  r_parts = r.split('/')
-                  #print (r_parts[0]+'/json-'+'/'.join(r_parts[1:])+'/'+newFile)
 
-                  with codecs.open(os.path.join(r_parts[0]+"/"+r_parts[1]+'/json-'+'/'.join(r_parts[2:]),newFile), 'w', encoding='utf8') as f_json:
+                  with codecs.open(os.path.join(file_path,newFile), 'w', encoding='utf8') as f_json:
                     f_json.write(docsStr)
                   f_json.close()
-                
+
+
 

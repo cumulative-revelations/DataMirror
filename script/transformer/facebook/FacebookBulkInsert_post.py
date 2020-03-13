@@ -11,6 +11,8 @@ import os, uuid, json
 import common as c
 import sentiment as s
 
+dirpath = os.getcwd()
+
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
 def bulkJsonData(json_file, _index, whatStuff):
 	json_list = c.getDataFromFile(json_file)
@@ -136,7 +138,7 @@ def fct():
 	c.createIndex('dfp_text_fb_posts', schema, elastic)
 
 
-	inputFolder = "../dataSource/json-facebook_data/posts"
+	inputFolder = dirpath+"/script/dataSource/json-facebook_data/posts"
 	for loadType in ["your_posts_1"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:

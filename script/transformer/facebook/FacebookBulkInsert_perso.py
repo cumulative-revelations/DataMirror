@@ -10,6 +10,7 @@ from elasticsearch import Elasticsearch, helpers
 import os, uuid, json
 import common as c
 
+dirpath = os.getcwd()
 
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
 def bulkJsonData(json_file, _index,whatStuff):
@@ -49,7 +50,7 @@ def fct():
   c.createIndex('dfp_perso_fb', schema, elastic)
 
 
-  inputFolder = "../dataSource/json-facebook_data/profile_information"
+  inputFolder = dirpath+"/script/dataSource/json-facebook_data/profile_information"
   for loadType in ["profile_information_fixed"]:
     whatFile = os.path.join(inputFolder, loadType+'.json')
     try:

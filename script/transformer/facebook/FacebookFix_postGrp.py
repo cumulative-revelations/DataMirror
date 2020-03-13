@@ -7,11 +7,13 @@ Created on Wed Dec 25 12:47:44 2019
 """
 
 import json
-import re
+import re, os
 import common as c
 
+dirpath = os.getcwd()
+
 def fct():
-  path = "../dataSource/facebook_data/groups" 
+  path = dirpath+"/script/dataSource/facebook_data/groups" 
   all_msg = []
 
   try:
@@ -67,7 +69,7 @@ def fct():
 
     docsStr.encode('ascii', errors='ignore').decode("utf-8")
 
-    f = open("../dataSource/json-facebook_data/groups"+"/your_posts_and_comments_in_groups_fixed.json", "w")
+    f = open(dirpath+"/script/dataSource/json-facebook_data/groups"+"/your_posts_and_comments_in_groups_fixed.json", "w")
     f.write(docsStr)
     f.close()
   except:

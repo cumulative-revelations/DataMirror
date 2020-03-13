@@ -10,6 +10,8 @@ import json, os
 from ast import literal_eval
 import common as c
 
+dirpath = os.getcwd()
+
 def flatten_json(y):
     out = {}
 
@@ -43,7 +45,7 @@ def deflat(a_dict):
 
 
 def fct():
-    path = "../dataSource/json-twitter_data" 
+    path = dirpath+"/script/dataSource/json-twitter_data" 
     print ("Twitter Perso - Fix")
     try:
         with open(path+'/'+'profile.json') as json_file:

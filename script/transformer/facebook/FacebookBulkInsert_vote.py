@@ -11,6 +11,7 @@ from elasticsearch import Elasticsearch, helpers
 import os, uuid, json
 import common as c
 
+dirpath = os.getcwd()
 
 # Generator to push bulk data from a JSON file into an Elasticsearch index / that function is changed according to files content
 def bulkJsonData(json_file, _index, whatStuff):
@@ -71,7 +72,7 @@ def fct():
 	# Create index with a schema
 	c.createIndex('dfp_fb_vote', schema, elastic)
 
-	inputFolder = "../dataSource/json-facebook_data/other_activity"
+	inputFolder = dirpath+"/script/dataSource/json-facebook_data/other_activity"
 	for loadType in ["polls_you_voted_on"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:

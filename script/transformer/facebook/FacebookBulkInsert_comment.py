@@ -105,7 +105,7 @@ def fct():
 	# Create index with a schema
 	c.createIndex('dfp_text_fb_comment', schema, elastic)
 
-	inputFolder = "../dataSource/json-facebook_data/comments"
+	inputFolder = "/script/dataSource/json-facebook_data/comments"
 	for loadType in ["comments"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
 		try:
