@@ -12,7 +12,7 @@ path=${PWD}
 
 
 # get the requirements
-cd /Users/emb19221/Desktop/stuff/DigitalFootPrint/
+cd $path
 pip3 install -r requirements.txt
 
 
@@ -37,12 +37,11 @@ sleep 30s
 curl -XDELETE localhost:9200/*
 sleep 5s
 
-# Fix Data files and Insert Indexes into elasticsearch
-cd $path/script
 
-#fix files / Twitter
+#Fix Data files and Insert Indexes into elasticsearch
 echo "run main"
-python3 main.py
+#cd $path/script
+python3 script/transformer/main.py
 
 
 # run kibana then delete its content
@@ -53,13 +52,18 @@ end tell'
 
 sleep 30s
 
+
+echo "run Vega Server"
+osascript -e 'tell app "Terminal"
+    do script "npm install http-server -g;http-server '$path'/vegaFiles --cors"
+end tell'
+
 # run kibana then insert stuff
 cd ..
 curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@$path/toImport/IndexPatterns.ndjson
 curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@$path/toImport/Visualisation.ndjson
 
 
+
 #Open kibana
 open http://localhost:5601
-
-
