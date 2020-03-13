@@ -14,8 +14,9 @@ Steps to use DataMirror:
 Notes:
 - Three terminals will open automatically, at some point, to run elasticsearch, kibana and a local server, they must remain open while working, unless you need to re-run the runThat.sh file, then, they must be closed.
 - We added some waiting time in the runThat.sh file, to give time to some copmmands to be "done", therefore, you might find it a bit slow, just be patient.
-- Finally, If you had any errors, please contact us.
 - You might need to add to the file "kibana.yml" the line: vega.enableExternalUrls: true
+- Finally, If you had any errors, please contact us.
+
 
 
 
