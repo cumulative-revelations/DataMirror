@@ -22,11 +22,9 @@ def getSentiment(myText):
 	neu = 0
 
 	myText=c.cleanText(myText)
-	part = myText.split("\t")
 
-	if len(part) >1:
-		text = part[0].strip()
-		date = part[1].strip()
+	if len(myText) >1:
+		text = myText.strip()
 
 		vs = analyzer.polarity_scores(text)
 		val = getVal(vs)

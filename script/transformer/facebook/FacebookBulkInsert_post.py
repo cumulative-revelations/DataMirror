@@ -110,6 +110,10 @@ def fct():
 		      "timestamp":   { "type":"date", "format":"date_optional_time||epoch_second"},
 		      "created_at": { "type": "alias", "path": "timestamp" },
 		      "all_text": { "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True},
+              "mySentiment":   { "type":"number"},
+              "sentPositive":   { "type":"number"},
+              "sentNegative":   { "type":"number"},
+		      
 		      "data":  {
 	          	"properties": {
 		      		"post": { "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True}

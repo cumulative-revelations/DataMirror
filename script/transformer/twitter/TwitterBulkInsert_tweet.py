@@ -28,7 +28,8 @@ def bulkJsonData(json_file, _index,whatStuff):
       my_text = json_doc["full_text"]
 
       #get sentiment
-      sentiment = s.getSentiment(my_text)
+      if not my_text.startswith("RT"):
+        sentiment = s.getSentiment(my_text)
 
       clean_my_text = c.cleanText(my_text)
       json_doc.update([ ("full_text", clean_my_text) ])  
@@ -138,7 +139,10 @@ def fct():
         "properties":{                               
         "created_at":{ "type":"date", "format":"EEE MMM dd HH:mm:ss ZZ yyyy"},
         "full_text":{ "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True},
-        "all_text": { "type": "alias", "path": "full_text" }
+        "all_text": { "type": "alias", "path": "full_text" },
+        "mySentiment":   { "type":"number"},
+        "sentPositive":   { "type":"number"},
+        "sentNegative":   { "type":"number"}
         } 
       }
 
