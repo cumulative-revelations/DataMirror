@@ -8,7 +8,7 @@ Steps to use DataMirror:
 - Download your data from Facebook, Twitter and LinkedIn.
 - Do not Change anything in the downloaded data files, do not change the name, do not Unzip, and do not Unzip then zip the file, you keep them as they are, It's very important.
 - Put your downloaded data files in the folder: script/dataSource
-- Then, in your terminal, run the shell file: sudo runThat.sh, that command will install the requirements, elasticsearch and kibana, run them, then it process the data, and create the visualisations.
+- Then, in your terminal, run the shell file: sudo sh runThat.sh, that command will install the requirements, elasticsearch and kibana, run them, then it process the data, and create the visualisations.
 - At the end, a browser will automatically open, it will show the Indexes, the Index Patterns and the Visualisations, and a Dashboard.
 
 Notes:
