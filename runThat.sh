@@ -60,8 +60,9 @@ end tell'
 
 # run kibana then insert stuff
 cd ..
-curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@$path/toImport/IndexPatterns.ndjson
-curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@$path/toImport/Visualisation.ndjson
+#curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@$path/toImport/IndexPatterns.ndjson
+#curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@$path/toImport/Visualisation.ndjson
+curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@$path/toImport/IndexPatterns_Visualisations.ndjson
 
 
 
