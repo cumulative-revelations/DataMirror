@@ -43,6 +43,8 @@ import FriendsCollecting
 import FriendBulkInsert
 import TopicDetection
 import TopicBulkInsert
+import SentimentCollecting
+import SentimentBulkInsert
 
 
 if __name__ == '__main__':
@@ -81,5 +83,6 @@ if __name__ == '__main__':
 	FriendBulkInsert.fct()
 	TopicDetection.fct()
 	TopicBulkInsert.fct()
-
+	SentimentCollecting.fct()
+	SentimentBulkInsert.fct()
 

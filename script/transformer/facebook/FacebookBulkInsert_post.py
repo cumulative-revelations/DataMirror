@@ -22,7 +22,7 @@ def bulkJsonData(json_file, _index, whatStuff):
 
 		sentiment=[0,0,0]
 		
-	    # use a 'yield' generator so that the data isn't loaded into memory
+		# use a 'yield' generator so that the data isn't loaded into memory
 		if '{"index"' not in doc:
 
 			# clean the text in comments and title from special character and emojies after json conversion
@@ -63,9 +63,8 @@ def bulkJsonData(json_file, _index, whatStuff):
 								my_lat = my_loc["latitude"]
 								my_lon = my_loc["longitude"]
 								new_my_loc = [my_lon,my_lat]
-								dt["place"].update([ ("location", new_my_loc) ])	 	 
-	           		
-
+								dt["place"].update([ ("location", new_my_loc) ])
+			 		
 			if 'title' in json_doc:
 				my_title = json_doc["title"]
 				clean_my_title = c.cleanText(my_title)
@@ -98,50 +97,51 @@ def fct():
 	schema = { 
 
 	  "settings": {
-	     "analysis": {
-	       "analyzer": {
-	         "my_english_analyzer": {"type": "standard","stopwords": "_english_"}
-	       }
-	     }
-	   },
-		      
+		 "analysis": {
+		   "analyzer": {
+			 "my_english_analyzer": {"type": "standard","stopwords": "_english_"}
+				}
+			}
+		},
+			  
 	  "mappings":{
-	     "properties":{                                     
-		      "timestamp":   { "type":"date", "format":"date_optional_time||epoch_second"},
-		      "created_at": { "type": "alias", "path": "timestamp" },
-		      "all_text": { "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True},
-              "mySentiment":   { "type":"number"},
-              "sentPositive":   { "type":"number"},
-              "sentNegative":   { "type":"number"},
-		      
-		      "data":  {
-	          	"properties": {
-		      		"post": { "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True}
-		      	}
-		      },
-		      "attachments": {
-		      	"properties": {
-			      "data": {
-			      	"properties": {
-				      "place": {
-				      	"properties": {
-				      		"location": {"type": "geo_point"}
-				      	}		      	
-			      	}
-			      }
-			     }
-			     
-		      	}
-		      }        
-	    	}
-	  	}
+		 "properties":{									 
+			"timestamp":   { "type":"date", "format":"EEE MMM dd HH:mm:ss ZZ yyyy||date_optional_time||epoch_second"},
+			"created_at": { "type": "alias", "path": "timestamp" },
+			"all_text": { "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True},
+
+			 "mySentiment":   { "type": "float"},
+			 "sentPositive":  { "type": "float"},
+			 "sentNegative":  { "type": "float"},
+
+			"data":  {
+				"properties": {
+					"post": { "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True}
+				}
+			 },
+			 "attachments": {
+				"properties": {
+				  "data": {
+					"properties": {
+					  "place": {
+						"properties": {
+							"location": {"type": "geo_point"}
+							}				
+						}
+					}
+				}
+				
+				}
+			  }
+			}
+		}
 
 	}
 
 	# Create index with a schema
 	c.createIndex('dfp_text_fb_posts', schema, elastic)
 
-
+	#inputFolder = "../../dataSource/json-facebook_data/posts"
 	inputFolder = dirpath+"/script/dataSource/json-facebook_data/posts"
 	for loadType in ["your_posts_1"]:
 		whatFile = os.path.join(inputFolder, loadType+'.json')
@@ -152,9 +152,3 @@ def fct():
 			print ("Error in Facebook Posts")
 			pass
 
-
-
-
-
-
-	#

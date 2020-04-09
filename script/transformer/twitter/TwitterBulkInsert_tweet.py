@@ -137,12 +137,12 @@ def fct():
 
       "mappings":{
         "properties":{                               
-        "created_at":{ "type":"date", "format":"EEE MMM dd HH:mm:ss ZZ yyyy"},
+        "created_at":{ "type":"date", "format":"EEE MMM dd HH:mm:ss ZZ yyyy||date_optional_time||epoch_second"},
         "full_text":{ "type": "text", "analyzer": "my_english_analyzer", "fields": {"keyword": { "type": "keyword"}}, "fielddata": True},
         "all_text": { "type": "alias", "path": "full_text" },
-        "mySentiment":   { "type":"number"},
-        "sentPositive":   { "type":"number"},
-        "sentNegative":   { "type":"number"}
+        "mySentiment":   { "type":"float"},
+        "sentPositive":   { "type":"float"},
+        "sentNegative":   { "type":"float"}
         } 
       }
 
