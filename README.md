@@ -5,7 +5,10 @@ Currently, DataMirror can be downloaded from Github and Run localy on macOS mach
 The software version on Docker is on progress, and to be shared soon, what can make the software runnable on any OS. 
 
 Steps to use DataMirror:
-- Download your data from Facebook, Twitter and LinkedIn.
+- Download your data from:
+  Facebook (https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav)
+  Twitter (https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive)
+  LinkedIn (https://www.linkedin.com/pulse/how-download-your-linkedin-archive-judy-schramm/)
 - Do not Change anything in the downloaded data files, do not change the name, do not Unzip, and do not Unzip then zip the file, you keep them as they are, It's very important.
 - Put your downloaded data files in the folder: script/dataSource
 - Then, in your terminal, run the shell file: sudo sh runThat.sh, that command will install the requirements, elasticsearch and kibana, run them, then it process the data, and create the visualisations.
