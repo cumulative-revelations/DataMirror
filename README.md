@@ -6,9 +6,9 @@ The software version on Docker is on progress, and to be shared soon, what can m
 
 Steps to use DataMirror:
 - Download your data from: <br/>
-  Facebook (https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) <br/>
-  Twitter (https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive) <br/>
-  LinkedIn (https://www.linkedin.com/pulse/how-download-your-linkedin-archive-judy-schramm/) <br/>
+  Facebook in JSON format (https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) <br/>
+  Twitter in JS format (https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive) <br/>
+  LinkedIn in CSV format (https://www.linkedin.com/pulse/how-download-your-linkedin-archive-judy-schramm/) <br/>
 - Do not Change anything in the downloaded data files, do not change the name, do not Unzip, and do not Unzip then zip the file, you keep them as they are, It's very important.
 - Put your downloaded data files in the folder: script/dataSource
 - Then, in your terminal, run the shell file: sudo sh runThat.sh, that command will install the requirements, elasticsearch and kibana, run them, then it process the data, and create the visualisations.
