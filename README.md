@@ -4,13 +4,13 @@ DataMirror is a tool that enables social network users to aggregate their online
 Currently, DataMirror can be downloaded from Github and Run localy on macOS and Linux (Ubuntu) machines.
 The software version on Docker is on progress, and to be shared soon, what can make the software runnable on any OS. 
 
-Steps to use DataMirror:
-<<<<<<< HEAD
+Steps to use DataMirror: <br/>
+
 - Download your Online Data from: <br/>
   Facebook (https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) <br/>
   Twitter (https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive) <br/>
   LinkedIn (https://www.linkedin.com/pulse/how-download-your-linkedin-archive-judy-schramm/) <br/>
-=======
+
 - Download your data from: <br/>
   Facebook in JSON format (https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) <br/>
   Twitter in JS format (https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive) <br/>
@@ -21,7 +21,7 @@ Steps to use DataMirror:
 - Then, in your terminal, run the shell file:  <br/> 
   sudo sh X_preRun_DataMirror.sh  <br/>
   With X as Linux or macOS.
-This commands would install the requirements, elasticsearch and kibana.
+  This commands would install the requirements, elasticsearch and kibana.
   - You might need to add to the file "kibana.yml" the line: vega.enableExternalUrls: true
   (In Ubuntu: /etc/kibana/kibana.yml)
 - Then run:
