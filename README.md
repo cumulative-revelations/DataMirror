@@ -14,13 +14,13 @@ Steps to use DataMirror:
 - Then, in your terminal, run the shell file:  <br/> 
   sudo sh X_preRun_DataMirror.sh  <br/>
   With X as Linux or macOS.
-This commands would install the requirements, elasticsearch and kibana.
+  This commands would install the requirements, elasticsearch and kibana.
   - You might need to add to the file "kibana.yml" the line: vega.enableExternalUrls: true
   (In Ubuntu: /etc/kibana/kibana.yml)
-  - Then run:
+- Then run:
   sudo sh X_Run_DataMirror.sh  <br/>
   With X as Linux or macOS.
- This command would run elasticsearch and kibana, then it process the data, and create the visualisations.
+  This command would run elasticsearch and kibana, then it process the data, and create the visualisations.
 - At the end, a browser will automatically open, it will show the Indexes, the Index Patterns and the Visualisations, and a Dashboard.
 
 Notes:
