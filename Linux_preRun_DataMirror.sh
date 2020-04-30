@@ -8,14 +8,13 @@ path=${PWD}
 #echo "$path"
 
 # if needed install those: python3, pip3, curl, npm
-# if needed install those
-#apt update
-#apt -y install python3
-#apt -y install python3-pip
-#apt -y install curl
-#apt -y install default-jre
-#apt -y install default-jdk
-#apt -y install npm
+apt update
+apt -y install python3
+apt -y install python3-pip
+apt -y install curl
+apt -y install default-jre
+apt -y install default-jdk
+apt -y install npm
 
 # get the requirements
 cd $path
