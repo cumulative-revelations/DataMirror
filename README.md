@@ -21,7 +21,7 @@ Steps to use DataMirror:
   sudo sh X_Run_DataMirror.sh  <br/>
   With X as Linux or macOS.
   This command would run elasticsearch and kibana, then it process the data, and create the visualisations.
-- At the end, a browser will automatically open, it will show the Indexes, the Index Patterns and the Visualisations, and a Dashboard.
+- At the end, a browser will automatically open (http://localhost:5601/), it will show the Indexes, the Index Patterns and the Visualisations, and a Dashboard.
 
 Notes:
 - Some terminals will open automatically, at some point, to run elasticsearch, kibana or a local server, they must remain open while working, unless you need to re-run the runThat.sh file, then, they must be closed.
