@@ -5,7 +5,7 @@ Currently, DataMirror can be downloaded from Github and Run localy on macOS and 
 The software version on Docker is on progress, and to be shared soon, what can make the software runnable on any OS. 
 
 Steps to use DataMirror:
-- Request your Online Data from the following Online Social (Note that this might take some time): <br/>
+- Request your Online Data from the following Online Social Media (Note that this might take some time): <br/>
   Facebook (https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) <br/>
   Twitter (https://help.twitter.com/en/managing-your-account/how-to-download-your-twitter-archive) <br/>
   LinkedIn (https://www.linkedin.com/pulse/how-download-your-linkedin-archive-judy-schramm/) <br/>
