@@ -11,7 +11,7 @@ Steps to use DataMirror:
   LinkedIn (https://www.linkedin.com/pulse/how-download-your-linkedin-archive-judy-schramm/) <br/>
   PS: Do not Change anything in the downloaded data files, do not change the name, do not Unzip, and do not Unzip then zip the   file, you keep them as they are, It's very important.
 - Download or Clone the current Github repository called "DataMirror".
-- Put your downloaded Social Media data files in the folder: Local_Path_to_DataMirror/DataMirror/script/dataSource
+- Put your downloaded Social Media data zipped files in the folder: Local_Path_to_DataMirror/DataMirror/script/dataSource
 - Then, in a terminal, run the following shell file to setup DataMirror:  <br/> 
     sudo sh DataMirror_setup_X.sh  <br/>
   With X as linux or macos.
@@ -22,7 +22,8 @@ Steps to use DataMirror:
     sudo sh run_DataMirror_X.sh  <br/>
     With X as linux or macos.
     This command would run elasticsearch and kibana, then it process the data, and create the visualisations.
-- At the end, a browser will automatically open (http://localhost:5601/), it will show the Dashboard of Visualisation.
+- At the end, a browser will automatically open the home page kibana (http://localhost:5601/), where you can find on the left the buttons to see the Dashboards of the created Visualisations.
+
 
 Notes:
 - Some terminals will open automatically, at some point, to run elasticsearch, kibana or a local server, they must remain open while working, unless you need to re-run the runThat.sh file, then, they must be closed.
