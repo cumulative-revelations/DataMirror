@@ -13,14 +13,14 @@ Steps to use DataMirror:
 - Download or Clone the current Github repository called "DataMirror".
 - Put your downloaded Social Media data files in the folder: Local_Path_to_DataMirror/DataMirror/script/dataSource
 - Then, in a terminal, run the following shell file to setup DataMirror:  <br/> 
-    sudo sh X_preRun_DataMirror.sh  <br/>
-  With X as Linux or macOS.
+    sudo sh DataMirror_setup_X.sh  <br/>
+  With X as linux or macos.
   This commands would install the requirements, elasticsearch and kibana.
   PS: You might need to add to the file "kibana.yml" the line: vega.enableExternalUrls: true
       (In Ubuntu: /etc/kibana/kibana.yml)
 - Then, to run the tool, run the follwing shell file:
-    sudo sh X_Run_DataMirror.sh  <br/>
-    With X as Linux or macOS.
+    sudo sh run_DataMirror_X.sh  <br/>
+    With X as linux or macos.
     This command would run elasticsearch and kibana, then it process the data, and create the visualisations.
 - At the end, a browser will automatically open (http://localhost:5601/), it will show the Dashboard of Visualisation.
 
