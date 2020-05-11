@@ -43,6 +43,6 @@ curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --fo
 
 
 #Open kibana
-sensible-browser http://localhost:5601
+sensible-browser http://localhost:5601/app/kibana\#/dashboards\?\_g\=\(\)
 
 
