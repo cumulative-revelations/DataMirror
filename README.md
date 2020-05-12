@@ -22,8 +22,8 @@ Steps to use DataMirror:
     sudo sh run_DataMirror_X.sh  <br/>
     With X as linux or macos.
     This command would run elasticsearch and kibana, then it process the data, and create the visualisations.
-- At the end, a browser will automatically open the home page kibana (http://localhost:5601/), where you can find on the left the button to display the Dashboards of the created Visualisations.
-<img src="images/kibana_homePage.png" width=700>
+- At the end, a browser will automatically open the Dashboards' page in kibana (http://localhost:5601/app/kibana#/dashboards?_g=()), where you can find on the left the button to display the Dashboards of the created Visualisations.
+<img src="images/FirstPage.png" width=700>
 
 
 Notes:
