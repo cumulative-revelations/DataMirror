@@ -51,75 +51,75 @@ def fct():
      print ("No Facebook Data")
   elif count > 1:
      print ("Duplicated Facebook File")
+  else:
+    # Get the file, unzip and fix it
+    for r, d, f in os.walk(dirpath+"/script/dataSource"):
+      for file in f:
+        if file.endswith(".zip") and file.startswith("facebook-"):
 
-  # Get the file, unzip and fix it
-  for r, d, f in os.walk(dirpath+"/script/dataSource"):
-    for file in f:
-      if file.endswith(".zip") and file.startswith("facebook-"):
+          inputFolderZipped = os.path.join(r,file)
 
-        inputFolderZipped = os.path.join(r,file)
+          inputFolder = dirpath+'/script/dataSource/facebook_data'
+          if not os.path.exists(inputFolder):
+          	os.mkdir(inputFolder)
 
-        inputFolder = dirpath+'/script/dataSource/facebook_data'
-        if not os.path.exists(inputFolder):
-        	os.mkdir(inputFolder)
+          #with zipfile.ZipFile(inputFolderZipped, 'r') as zip_ref:
+          #	zip_ref.extractall(inputFolder)
 
-        #with zipfile.ZipFile(inputFolderZipped, 'r') as zip_ref:
-        #	zip_ref.extractall(inputFolder)
+          print ("Facebook - Unzip ")
 
-        print ("Facebook - Unzip ")
-
-        # Create a ZipFile Object and load sample.zip in it
-        with ZipFile(inputFolderZipped, 'r') as zipObj:
-           # Get a list of all archived file names from the zip
-           listOfFileNames = zipObj.namelist()
-           # Iterate over the file names
-           for fileName in listOfFileNames:
-               # Check filename endswith csv
-               if fileName.endswith('.json'):
-                   # Extract a single file from zip
-                   zipObj.extract(fileName, inputFolder)
-
-
-
-
-        print ("Facebook - Fix")
-        jsonInputFolder = dirpath+'/script/dataSource/json-facebook_data'
-        if not os.path.exists(jsonInputFolder):
-        	os.mkdir(jsonInputFolder)
+          # Create a ZipFile Object and load sample.zip in it
+          with ZipFile(inputFolderZipped, 'r') as zipObj:
+             # Get a list of all archived file names from the zip
+             listOfFileNames = zipObj.namelist()
+             # Iterate over the file names
+             for fileName in listOfFileNames:
+                 # Check filename endswith csv
+                 if fileName.endswith('.json'):
+                     # Extract a single file from zip
+                     zipObj.extract(fileName, inputFolder)
 
 
 
-        for r, d, f in os.walk(inputFolder):
-          file_path = r.replace(inputFolder,jsonInputFolder)
-          if not os.path.exists(file_path):
-            os.mkdir(file_path)
+
+          print ("Facebook - Fix")
+          jsonInputFolder = dirpath+'/script/dataSource/json-facebook_data'
+          if not os.path.exists(jsonInputFolder):
+          	os.mkdir(jsonInputFolder)
 
 
 
-        # r=root, d=directories, f=files
-        for r, d, f in os.walk(inputFolder):
+          for r, d, f in os.walk(inputFolder):
             file_path = r.replace(inputFolder,jsonInputFolder)
-            for file in f:
-              if file.endswith(".json"): #I can add a list of files
-                #subPath = os.path.join(r, file)
-                #print ("file: ", file)
-
-                if file.endswith("_fixed.json"):
-                  pass
-                else:  
-                  with codecs.open(os.path.join(r, file), 'r', encoding='utf8') as f_js:
-                    #print (os.path.join(r, file))
-                    MyFile=f_js.readlines()
+            if not os.path.exists(file_path):
+              os.mkdir(file_path)
 
 
-                  #MyFile=open(os.path.join(r, file),encoding="utf8",'r').read()
-                  docs = find_parts(MyFile[1:-1])
-                  docsStr= '\n'.join(docs)
-                  newFile = file.split('.')[0]+'.json'
 
-                  with codecs.open(os.path.join(file_path,newFile), 'w', encoding='utf8') as f_json:
-                    f_json.write(docsStr)
-                  f_json.close()
+          # r=root, d=directories, f=files
+          for r, d, f in os.walk(inputFolder):
+              file_path = r.replace(inputFolder,jsonInputFolder)
+              for file in f:
+                if file in ["your_posts_and_comments_in_groups.json","profile_information.json","comments.json","your_posts_1.json","likes_on_external_sites.json","pages.json","posts_and_comments.json","friends.json","received_friend_requests.json","rejected_friend_requests.json","removed_friends.json","followers.json","following.json"]: #file.endswith(".json"): #I can add a list of files
+                  #subPath = os.path.join(r, file)
+                  #print ("file: ", file)
+
+                  if file.endswith("_fixed.json"):
+                    pass
+                  else:  
+                    with codecs.open(os.path.join(r, file), 'r', encoding='utf8') as f_js:
+                      #print (os.path.join(r, file))
+                      MyFile=f_js.readlines()
+
+
+                    #MyFile=open(os.path.join(r, file),encoding="utf8",'r').read()
+                    docs = find_parts(MyFile[1:-1])
+                    docsStr= '\n'.join(docs)
+                    newFile = file.split('.')[0]+'.json'
+
+                    with codecs.open(os.path.join(file_path,newFile), 'w', encoding='utf8') as f_json:
+                      f_json.write(docsStr)
+                    f_json.close()
 
 
 

@@ -94,23 +94,23 @@ def fct():
     try:
 
         #  LinkedIn friends
+        if os.path.isfile(path+'json-LinkedIn_data/Connections.json'):
+            json_file = open(path+'json-LinkedIn_data/Connections.json', encoding="utf8", errors='ignore')
+            json_list = [line.strip() for line in json_file]
 
-        json_file = open(path+'json-LinkedIn_data/Connections.json', encoding="utf8", errors='ignore')
-        json_list = [line.strip() for line in json_file]
-
-        for doc in json_list:
-            json_doc = json.loads(doc)
-            new_data.append({"name": c.cleanText(json_doc["First Name"] + ' ' + json_doc["Last Name"]) ,"screen_name" : c.cleanText(json_doc["First Name"] + ' ' + json_doc["Last Name"]), "tags": 1, "type": "friend", "source" : "LinkedIn"})
-           
+            for doc in json_list:
+                json_doc = json.loads(doc)
+                new_data.append({"name": c.cleanText(json_doc["First Name"] + ' ' + json_doc["Last Name"]) ,"screen_name" : c.cleanText(json_doc["First Name"] + ' ' + json_doc["Last Name"]), "tags": 1, "type": "friend", "source" : "LinkedIn"})
+               
 
         #  Twitter friends
 
         # remove files if existed
-        file_folr = open(path+'followers.csv',"w") 
-        file_folg = open(path+'followings.csv',"w") 
-
-
         if os.path.isfile(path+'json-twitter_data/account.json'):
+
+            file_folr = open(path+'followers.csv',"w") 
+            file_folg = open(path+'followings.csv',"w") 
+        
             with open(path+'json-twitter_data/account.json') as json_file:
                 data = json.load(json_file)
 
@@ -164,26 +164,27 @@ def fct():
         #  Facebook friends
 
         # get lists of tags
-        list_ftags = facebookTags(path)
-        list_friends=[]
+        if os.path.isfile(path+'json-facebook_data/friends/friends.json'):
+            list_ftags = facebookTags(path)
+            list_friends=[]
+        
+            json_file = open(path+'json-facebook_data/friends/friends.json', encoding="utf8", errors='ignore')
+            json_list = [line.strip() for line in json_file]
 
-        json_file = open(path+'json-facebook_data/friends/friends.json', encoding="utf8", errors='ignore')
-        json_list = [line.strip() for line in json_file]
+            for doc in json_list:
+                json_doc = json.loads(doc)
 
-        for doc in json_list:
-            json_doc = json.loads(doc)
+                list_friends.append(json_doc['name'])
 
-            list_friends.append(json_doc['name'])
+            for fr in range(len(list_friends)):
+                count = 1
 
-        for fr in range(len(list_friends)):
-            count = 1
-
-            for ftag in range(len(list_ftags)):
-                if list_friends[fr].lower() == list_ftags[ftag].lower():
-                    count = count + 1
+                for ftag in range(len(list_ftags)):
+                    if list_friends[fr].lower() == list_ftags[ftag].lower():
+                        count = count + 1
 
 
-            new_data.append({"name": c.cleanText(list_friends[fr]) ,"screen_name" : c.cleanText(list_friends[fr]), "tags": count, "type": "friend", "source" : "Facebook"})
+                new_data.append({"name": c.cleanText(list_friends[fr]) ,"screen_name" : c.cleanText(list_friends[fr]), "tags": count, "type": "friend", "source" : "Facebook"})
 
 
         # create the file

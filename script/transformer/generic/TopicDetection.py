@@ -61,62 +61,69 @@ def fct():
 
     try:
 
-	    # Facebook
-	    doc_complete_fb = []
+        # Facebook
+        doc_complete_fb = []
 
-	    json_file = open(path+'json-facebook_data/posts/your_posts_1.json', encoding="utf8", errors='ignore')
-	    json_list = [line.strip() for line in json_file]
+        if os.path.isfile(path+'json-facebook_data/posts/your_posts_1.json'):
+            json_file = open(path+'json-facebook_data/posts/your_posts_1.json', encoding="utf8", errors='ignore')
+            json_list = [line.strip() for line in json_file]
 
-	    for doc in json_list:
-	        json_doc = json.loads(doc)
+            for doc in json_list:
+                json_doc = json.loads(doc)
 
-	        if 'data' in json_doc:
-	            for dt in json_doc['data']:
-	                if 'post' in dt:
-	                    my_text = dt["post"]
-	                    doc_complete_fb.append(my_text)
+                if 'data' in json_doc:
+                    for dt in json_doc['data']:
+                        if 'post' in dt:
+                            my_text = dt["post"]
+                            doc_complete_fb.append(my_text)
 
-	    fb_topics = getTopics(doc_complete_fb)
+            fb_topics = getTopics(doc_complete_fb)
 
-	    for i in range(len(fb_topics)):
-	        for j in range(len(fb_topics[i])):
-	            new_data.append({"topic_id": "fb_"+str(i) ,"topic_word" : c.cleanText(fb_topics[i][j]), "source" : "Facebook"})
-	     
-
-
-	    # tweets
-	    doc_complete_tw = []
-
-	    json_file = open(path+'json-twitter_data/tweet.json', encoding="utf8", errors='ignore')
-	    json_list = [line.strip() for line in json_file]
-
-	    for doc in json_list:
-	        json_doc = json.loads(doc)
-
-	        if not json_doc['full_text'].startswith("RT @"):
-	        	my_text = json_doc["full_text"]
-	        	doc_complete_tw.append(my_text)
-
-	    tw_topics = getTopics(doc_complete_tw)
-
-	    for i in range(len(tw_topics)):
-	        for j in range(len(tw_topics[i])):
-	            new_data.append({"topic_id": "tw_"+str(i) ,"topic_word" : c.cleanText(tw_topics[i][j]), "source" : "Twitter"})
+            for i in range(len(fb_topics)):
+                for j in range(len(fb_topics[i])):
+                    new_data.append({"topic_id": "fb_"+str(i) ,"topic_word" : c.cleanText(fb_topics[i][j]), "source" : "Facebook"})
+             
 
 
+        # tweets
+        doc_complete_tw = []
 
-	    string = ""
-	    for mydata in new_data[:-1]:
-	        string = string + str(mydata) + "\n"
-	    string = string + str(new_data[-1])
+        if os.path.isfile(path+'json-twitter_data/tweet.json'):
+            json_file = open(path+'json-twitter_data/tweet.json', encoding="utf8", errors='ignore')
+            json_list = [line.strip() for line in json_file]
 
-	    string = string.replace("'",'"')
+            for doc in json_list:
+                json_doc1 = json.loads(doc)
+
+                if 'tweet' in json_doc1:
+                    json_doc = json_doc1["tweet"]
+                else:
+                    json_doc=json_doc1
+
+                if not json_doc['full_text'].startswith("RT @"):
+                    my_text = json_doc["full_text"]
+                    doc_complete_tw.append(my_text)
+
+            tw_topics = getTopics(doc_complete_tw)
+
+            for i in range(len(tw_topics)):
+                for j in range(len(tw_topics[i])):
+                    new_data.append({"topic_id": "tw_"+str(i) ,"topic_word" : c.cleanText(tw_topics[i][j]), "source" : "Twitter"})
 
 
-	    file_res = open(dirpath+'/vegaFiles/Topics.json',"w") 
-	    file_res.write(string)
-	    file_res.close()
-	    print ("Collect Topics")
+
+        string = ""
+        for mydata in new_data[:-1]:
+            string = string + str(mydata) + "\n"
+        string = string + str(new_data[-1])
+
+        string = string.replace("'",'"')
+
+
+        file_res = open(dirpath+'/vegaFiles/Topics.json',"w") 
+        file_res.write(string)
+        file_res.close()
+        print ("Collect Topics")
 
     except:
        print ("Error in Collect Topics")

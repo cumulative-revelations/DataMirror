@@ -20,11 +20,15 @@ def bulkJsonData(json_file, _index,whatStuff):
     # use a 'yield' generator so that the data isn't loaded into memory
     if '{"index"' not in doc:
 
-      json_doc = json.loads(doc)
+      json_doc1 = json.loads(doc)
 
       sentiment=[0,0,0]
 
-      #print (doc)
+      if 'tweet' in json_doc1:
+        json_doc = json_doc1["tweet"]
+      else:
+        json_doc=json_doc1
+
       my_text = json_doc["full_text"]
 
       #get sentiment
@@ -156,12 +160,12 @@ def fct():
   inputFolder = dirpath+"/script/dataSource/json-twitter_data"
   for loadType in ["tweet"]:
     whatFile = os.path.join(inputFolder, loadType+'.json')
-    try:
-      response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_text_tw_tweet",loadType))
-      print ("Insert Twitter Tweets")
-    except:
-      print ("Error in Twitter : "+ whatFile)
-      pass
+    #try:
+    response = helpers.bulk(elastic, bulkJsonData(whatFile, "dfp_text_tw_tweet",loadType))
+    print ("Insert Twitter Tweets")
+    #except:
+    #  print ("Error in Twitter : "+ whatFile)
+    #  pass
 
   
 

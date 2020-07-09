@@ -10,6 +10,7 @@ import os
 import sys
 import codecs
 from zipfile import ZipFile
+import shutil
 
 dirpath = os.getcwd()
 
@@ -81,6 +82,18 @@ def fct():
                      zipObj.extract(fileName, inputFolder)
           
 
+          #some people have the data in twitter/data file so we move it
+          if os.path.exists(dirpath+'/script/dataSource/twitter_data/data'):
+            source = dirpath+'/script/dataSource/twitter_data/data/'
+            dest1 = dirpath+'/script/dataSource/twitter_data'
+            thefiles = os.listdir(source)
+            for f in thefiles:
+              if f.endswith(".js"):
+                if os.path.exists(dest1+"/"+f):
+                  os.remove(dest1+"/"+f)
+                shutil.move(source+f, dest1)
+
+
 
 
           print ("Twitter - Fix")
@@ -93,8 +106,8 @@ def fct():
           for r, d, f in os.walk(inputFolder):
             #for c in f:
             for file in f:
-              if file.endswith(".js"): #I can add a list of files
-                #subPath = os.path.join(r, file)
+              if file in ["tweet.js","like.js","follower.js","following.js","profile.js","phone-number.js"]: #file.endswith(".js"): #I can add a list of files
+                  #subPath = os.path.join(r, file)
                   #print ("folder",r)
                   with codecs.open(os.path.join(r, file), 'r', encoding='utf8') as f_js:
                     MyFile=f_js.readlines()
