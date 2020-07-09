@@ -1,18 +1,18 @@
 #Created on Wed Dec 25 12:47:44 2019
 #@author: Amal Htait
 
+
 #!/bin/sh
 
 path=${PWD}
 
 # run elasticsearch ( delete its content when testing )
 echo "run elasticsearch"
-sudo systemctl stop elasticsearch
-sudo systemctl start elasticsearch 
-sudo systemctl enable elasticsearch
+osascript -e 'tell app "Terminal"
+    do script "cd '$path'/elasticsearch; bin/elasticsearch"
+end tell'
 
 sleep 10s
-
 
 echo "delete all from elasticsearch"
 curl -XDELETE localhost:9200/*
@@ -27,14 +27,16 @@ python3 script/transformer/main.py
 
 # run kibana then delete its content
 echo "run kibana"
-sudo systemctl stop kibana
-sudo systemctl enable kibana
-sudo systemctl start kibana 
+osascript -e 'tell app "Terminal"
+    do script "cd '$path'/kibana;bin/kibana"
+end tell'
 sleep 30s
 
+
 echo "run Vega Server"
-gnome-terminal -- bash -c "npm install http-server -g; http-server '$path'/vegaFiles -p 8080 --cors; exec bash"
-	
+osascript -e 'tell app "Terminal"
+    do script "npm install http-server -g;http-server '$path'/vegaFiles --cors"
+end tell'
 
 # run kibana then insert stuff
 cd ..
@@ -43,6 +45,6 @@ curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --fo
 
 
 #Open kibana
-sensible-browser http://localhost:5601
-
+#open http://localhost:5601
+open http://localhost:5601/app/kibana\#/dashboards\?\_g\=\(\)
 

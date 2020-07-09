@@ -19,8 +19,8 @@ def fct():
   # Get the file, unzip and fix it
   for r, d, f in os.walk(dirpath+"/script/dataSource"):
     for file in f:
-      if file.endswith(".zip") and file.startswith("Basic_LinkedInDataExport_"):
-
+      #if file.endswith(".zip") and file.startswith("Basic_LinkedInDataExport_"):
+      if file.endswith(".zip") and "_LinkedInDataExport_" in file:
         inputFolderZipped = os.path.join(r,file)
 
         inputFolder = dirpath+'/script/dataSource/LinkedIn_data'

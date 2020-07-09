@@ -102,23 +102,26 @@ def fct():
 
                   MyFile_new=[]
 
-                  for i in range(len(MyFile)):
-                    lines=MyFile[i].replace('\\n{ ','')
-                    lines=lines.replace(' }…','')
-                    lines=lines.replace(' }\\n','')
+                  try:
+                    for i in range(len(MyFile)):
+                      lines=MyFile[i].replace('\\n{ ','')
+                      lines=lines.replace(' }…','')
+                      lines=lines.replace(' }\\n','')
 
-                    MyFile_new.append(lines)
+                      MyFile_new.append(lines)
 
-                  #MyFile=open(os.path.join(r, file),encoding="utf8",'r').read()
-                  docs = find_parts(MyFile_new[1:-1])
-                  docsStr= '\n'.join(docs)
-                  newFile = file.split('.')[0]+'.json'
+                    #MyFile=open(os.path.join(r, file),encoding="utf8",'r').read()
+                    docs = find_parts(MyFile_new[1:-1])
+                    docsStr= '\n'.join(docs)
+                    newFile = file.split('.')[0]+'.json'
 
-                  r_parts = r.split("/")
-                  m_parts = "/".join(r_parts[:-1])
-                  with codecs.open(os.path.join(m_parts+"/json-"+r_parts[-1],newFile), 'w', encoding='utf8') as f_json:
-                    f_json.write(docsStr)
-                  f_json.close()
+                    r_parts = r.split("/")
+                    m_parts = "/".join(r_parts[:-1])
+                    with codecs.open(os.path.join(m_parts+"/json-"+r_parts[-1],newFile), 'w', encoding='utf8') as f_json:
+                      f_json.write(docsStr)
+                    f_json.close()
+                  except:
+                    pass
 
 
 
